@@ -10,7 +10,16 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: Run a one-line script
-      run: echo Hello, world!
+      run: |
+        if [ "${{ github.event_name }}" = "pull_request" ]; then
+        echo "This is a pull request event."
+        # Add steps specific to pull requests,
+          echo This is MD's script for pull_request event
+        else
+        echo "This is a push event."
+        # Add steps specific to push events,
+          echo This is MD's script for push event
+        fi
     - name: Run a multi-line script
       run: |
           echo Add other actions to build,
